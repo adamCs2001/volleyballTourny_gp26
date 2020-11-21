@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=League
+comment0.text=\r\n\ The\ League\ class\ manages\ the\ whole\ league.\ from\ here\ you\ can\ add\ matches\ \r\n\ and\ check\ the\ standings\ in\ the\ league\ it\ keeps\ a\ list\ of\ all\ the\ teams\ \r\n\ currently\ in\ the\ league\r\n\r\n
+comment1.params=
+comment1.target=League()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ League\r\n
+comment2.params=
+comment2.target=void\ leagueSetup()
+comment2.text=\r\n\ simple\ method\ to\ create\ teams\ and\ adds\ them\ to\ divisions.\r\n\r\n\ \r\n
+comment3.params=team1\ team2
+comment3.target=boolean\ checkDivision(Team,\ Team)
+comment3.text=\r\n\ simple\ method\ to\ check\ if\ both\ teams\ are\ in\ the\ same\ division\ should\ return\ true\ or\ false\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ boolean\r\n
+comment4.params=divisionName
+comment4.target=java.util.ArrayList\ getTeamsInDivision(int)
+comment4.text=\r\n\ Iterate\ over\ the\ team\ list\ and\ put\ teams\ from\ the\ given\ division\ into\ a\ list\ then\ return\ it.\r\n\r\n\ @param\ \ divisionName\ \ name\ of\ the\ division\r\n\ @return\ list\ of\ teams\ in\ the\ same\ division\r\n
+comment5.params=team1\ team2\ score1\ score2
+comment5.target=void\ addMatch(Team,\ Team,\ java.util.ArrayList,\ java.util.ArrayList)
+comment5.text=\r\n\ Add\ a\ match\ and\ all\ relevant\ scores\ to\ the\ teams\ participating\r\n\ Checks\ if\ both\ teams\ are\ in\ the\ same\ division,\ if\ they\ aren't,\ does\ nothing\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
+comment6.params=divisionName
+comment6.target=void\ calculateStanding(int)
+comment6.text=\r\n\ iterates\ over\ a\ division\ and\ prints\ out\ the\ standings.\ should\ print\ \r\n\ them\ in\ order\ from\ 1st\ to\ last\ place.\r\n\ \r\n\ has\ to\ adjust\ standing\ by\ both\ league\ points\ and\ point\ diff\ which\ is\ \r\n\ stored\ on\ each\ team.\ could\ do\ something\ here\ where\ if\ a\ team\ has\ 0\ \r\n\ points\ and\ 0\ ptdiff\ (because\ they\ didn't\ compete\ or\ something)\ make\ \r\n\ it\ print\ them\ last\ with\ DNQ\ (did\ not\ qualify)\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
+numComments=7

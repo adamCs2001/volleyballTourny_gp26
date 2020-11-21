@@ -8,5 +8,5 @@ PROJECT TITLE: Volleyball Tournament
 PURPOSE OF PROJECT: Assignment 4
 VERSION or DATE:
 HOW TO START THIS PROJECT:
-AUTHORS: Adam Lichter, 
+AUTHORS: Adam Lichter, Nhu Nguyen, Emily Seward
 USER INSTRUCTIONS:

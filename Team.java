@@ -10,12 +10,12 @@ import java.lang.Math;
 public class Team
 {
     // instance variables - replace the example below with your own
-    String name;
-    String division;
-    ArrayList<Player> playerList;
-    ArrayList<Coach> coachList;
-    int leaguePoints;
-    int pointDiff;
+    private String name;
+    private String division;
+    private ArrayList<Player> playerList;
+    private ArrayList<Coach> coachList;
+    private int leaguePoints;
+    private int pointDiff;
 
     /**
      * Constructor for objects of class Team
@@ -42,19 +42,27 @@ public class Team
         this.pointDiff = 0;
 
         for (int x = 0; x < players; x++) {
-            int jerseyNum = (int)Math.random()*100 + 1;
+            int jerseyNum = (int)Math.random() * 100 + 1;
             Player player = new Player("player " + jerseyNum);
 
             playerList.add(player);
         }
 
         for (int x = 0; x < coaches; x++) {
-            int jerseyNum = (int)Math.random()*100 + 1;
+            int jerseyNum = (int)Math.random() * 100 + 1;
             Coach coach = new Coach("Coach " + jerseyNum);
 
             coachList.add(coach);
         }
 
+    }
+    
+    /**
+     * returns the division associated with this team
+     */
+    public String getName()
+    {
+        return this.name;
     }
 
     /**
@@ -92,8 +100,8 @@ public class Team
     /**
      * updates the league points won by this team
      */
-    public void updateLeaguePoints(int addPoints)
+    public void updateLeaguePoints()
     {
-        this.pointDiff += addPoints;
+        this.leaguePoints++;
     }
 }
