@@ -38,6 +38,7 @@ public class Team
         this.name = name;
         this.division = "Division " + division;
         this.playerList = new ArrayList<>();
+        this.coachList = new ArrayList<>();
         this.leaguePoints = 0;
         this.pointDiff = 0;
 
