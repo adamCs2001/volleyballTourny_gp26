@@ -214,20 +214,18 @@
          */
         public void calculateStanding(String divisionName)
         {
-            Map<Integer, String> pointList = new TreeMap<>((Comparator<Integer>) (o1, o2) -> o2.compareTo(o1));
             ArrayList<Team> List = getTeamsInDivision(divisionName);
-        
-            for (Team team : List)
-            {
-                pointList.put(team.getLeaguePoints(),team.getName());
-            }
+            
+            Collections.sort(List, Comparator.comparing(Team::getLeaguePoints)
+                       .thenComparing(Team::getpointDiff));
+            Collections.reverse(List);
+            
             int rank = 1;
-            for(Map.Entry <Integer, String> entry : pointList.entrySet()) 
+            for(Team team : List) 
             {
-                System.out.println("Team name: " + entry.getValue() + ", " + "Points: " + entry.getKey() + ", " + "Rank: " + rank);
+                System.out.println("Team name: " + team.getName() + ", " + "Points: " + team.getLeaguePoints() + ", " + "Rank: " + rank);
                 rank++;
             }
-        
         }
-        
+
 }
