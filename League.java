@@ -1,231 +1,221 @@
 
-    import java.util.*;
+import java.util.*;
+/**
+ * The League class manages the whole league. from here you can add matches 
+ * and check the standings in the league it keeps a list of all the teams 
+ * currently in the league
+ *
+ */
+public class League
+{
+    // instance variables
+    private ArrayList<Team> teamList;
+    private int players;
+    private int coaches;
+
     /**
-     * The League class manages the whole league. from here you can add matches 
-     * and check the standings in the league it keeps a list of all the teams 
-     * currently in the league
-     *
+     * Constructor for objects of class League
      */
-    public class League
+    public League()
     {
-        // instance variables
-        private ArrayList<Team> teamList;
-        private int players;
-        private int coaches;
-        private ArrayList<Integer> score1;
-        private ArrayList<Integer> score2;
-    
-        /**
-         * Constructor for objects of class League
-         */
-        public League()
-        {
-            teamList = new ArrayList<>();
-            final int players = 12;
-            final int coaches = 2;
-            
+        teamList = new ArrayList<>();
+        final int players = 12;
+        final int coaches = 2;
+
+    }
+
+    /**
+     * Simple method to create teams and adds them to divisions.
+     * 
+     */
+    public void leagueSetup()
+    {
+        for (int x = 0; x < 15; x++) {
+            int division = ((x + 1) % 3) + 1;
+            Team team = new Team("Team " + (x+1), division, players, coaches);
+            teamList.add(team);
         }
-        
-        /**
-         * Simple method to create teams and adds them to divisions.
-         * 
-         */
-        public void leagueSetup()
+    }
+
+    /**
+     * Simple method to check if both teams are in the same division should return true or false
+     *
+     * @param  y  a sample parameter for a method
+     * @return    boolean
+     */
+    private boolean checkDivision(Team team1, Team team2)
+    {
+        if (team1.getDivision().equals(team2.getDivision()))
         {
-            for (int x = 0; x < 15; x++) {
-                int division = ((x + 1) % 3) + 1;
-                Team team = new Team("Team " + (x+1), division, players, coaches);
-                teamList.add(team);
-            }
+            return true;
         }
-        
-        /**
-         * Simple method to check if both teams are in the same division should return true or false
-         *
-         * @param  y  a sample parameter for a method
-         * @return    boolean
-         */
-        private boolean checkDivision(Team team1, Team team2)
+        else 
         {
-            if (team1.getDivision().equals(team2.getDivision()))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return false;
         }
-        
-        
-        /**
-         * Iterate over the team list and put teams from the given division into a list then return it.
-         *
-         * @param  divisionName  name of the division
-         * @return list of teams in the same division
-         */
-        private ArrayList<Team> getTeamsInDivision(String divisionName)
+    }
+
+    /**
+     * Iterate over the team list and put teams from the given division into a list then return it.
+     *
+     * @param  divisionName  name of the division
+     * @return list of teams in the same division
+     */
+    public ArrayList<Team> getTeamsInDivision(String divisionName)
+    {
+        ArrayList<Team> divisionTeam = new ArrayList();
+        for (Team team : teamList) 
         {
-            ArrayList<Team> divisionTeam = new ArrayList();
-            for (Team team : teamList) 
+            if (team.getDivision().equals(divisionName))
             {
-                if (team.getDivision().equals(divisionName))
-                {
-                    divisionTeam.add(team);
-                }
-            }
-            return divisionTeam;
-        }
-        
-        /**
-         * Starts a tournament based on the League setup, creates matches between teams in the same division.
-         *
-         */
-        public void tournament()
-        {
-            Random rand = new Random();
-            for (int x = 1; x < 4; x++)
-            {
-                ArrayList<Team> divisionTeam = getTeamsInDivision("Division " + x);
-                
-                while (divisionTeam.size() != 1)
-                {
-                    
-                    for (int i = 1; i < divisionTeam.size(); i++)
-                    {
-                        ArrayList<ArrayList<Integer>> scoreList = createScore();
-                        System.out.println(divisionTeam.get(0).getName() + " : " + divisionTeam.get(i).getName());
-                        System.out.println(scoreList); // I put this and the line above to check the content of scoreList, remove if you want.
-                        addMatch(divisionTeam.get(0),divisionTeam.get(i),scoreList.get(0),scoreList.get(1));
-                        
-                    }
-                    divisionTeam.remove(0);
-                }
+                divisionTeam.add(team);
             }
         }
-        
-        /**
-         * Generate two lists of scores for two teams.
-         *
-         */
-        private ArrayList<ArrayList<Integer>> createScore()
-        {
-            score1 = new ArrayList();
-            score2 = new ArrayList();
-            int point1 = 0;
-            int point2 = 0;
-            int maxScore = 21;
-            Random rand = new Random();
-                for (int i = 0; i < 5; i++)
-                {
-                    // If reaches 5th match.
-                    if (i == 4) 
-                    {
-                        maxScore = 15;
-                    }
-                    
-                    if (rand.nextInt(2) == 0)
-                    {
-                        score1.add(maxScore);
-                        score2.add(rand.nextInt(maxScore));
-                        point1++;
-                    }
-                    else 
-                    {
-                        score2.add(maxScore);
-                        score1.add(rand.nextInt(maxScore));
-                        point2++;
-                    }
-                    // If one of the teams reaches 3 points.
-                    if (point1 == 3 || point2 == 3) 
-                    {
-                        break;
-                    }
-                    
-                }
-            ArrayList<ArrayList<Integer>> arr = new ArrayList();
-            arr.add(score1);
-            arr.add(score2);
-            return arr;
+        return divisionTeam;
+    }
+
+    private boolean scoreValidator(ArrayList<Integer> scores1, ArrayList<Integer> scores2) {
+        boolean err = true;
+
+        if (scores1.size() != scores2.size()) {
+            err = false;
+            System.out.println("differnt numbers of set scores");
         }
-    
-    
-        /**
-         * Add a match and all relevant scores to the teams participating
-         * Checks if both teams are in the same division, if they aren't, does nothing
-         *
-         * 
-         */
-        private void addMatch(Team team1, Team team2, 
-                             ArrayList<Integer> score1, ArrayList<Integer> score2)
-        {
-            if (!checkDivision(team1,team2))
-            {
-                ;
+
+        if (scores1.size() < 2 || scores2.size() < 2) {
+            err = false;
+            System.out.println("not enough games played");
+        }
+
+        if (scores1.stream().filter(x -> (x > 21)).filter(x -> (x < 0)).count() > 0) {
+            err = false;
+            System.out.println("score 1 out of range");
+        }
+
+        if (scores2.stream().filter(x -> (x > 21)).filter(x -> (x < 0)).count() > 0) {
+            err = false;
+            System.out.println("score 2 out of range");
+        }
+
+        if (scores1.size() < 5) {
+            if (scores2.stream().filter(x -> (x == 21)).count() != 3 && scores1.stream().filter(x -> (x == 21)).count() != 3) {
+                err = false;
+                System.out.println("no winner declared");
             }
-            
-            int point1 = 0;
-            int point2 = 0;
-            
-            for (int x = 0; x < score1.size(); x++)
-             {
-                int pointDiff = score1.get(x) - score2.get(x);
-                if (pointDiff > 0)
-                {
-                    team1.updateLeaguePoints();
-                    point1++;
-                }
-                else
-                {
-                    team2.updateLeaguePoints();
-                    point2++;
-                }
-                
-                team1.updatePointDiff(pointDiff);
-                team2.updatePointDiff(-pointDiff);
-                
-                if ((point1 == 3) || (point2 == 3))
-                {
-                    break;
-                }
-            }
-            
-            if (point1 == 3)
-            {
-                team1.updateLeaguePoints();
-            }
-            else 
-            {
-                team2.updateLeaguePoints();
+        } else {
+            if (scores1.get(4) != 15 && scores2.get(4) != 15) {
+                err = false;
+                System.out.println("no winner declared");
             }
         }
-        
-         /**
-         * iterates over a division and prints out the standings. should print 
-         * them in order from 1st to last place.
-         * 
-         * has to adjust standing by both league points and point diff which is 
-         * stored on each team. could do something here where if a team has 0 
-         * points and 0 ptdiff (because they didn't compete or something) make 
-         * it print them last with DNQ (did not qualify)
-         *
-         * @param  y  a sample parameter for a method
-         * @return    the sum of x and y
-         */
-        public void calculateStanding(String divisionName)
+
+
+        return err;
+    }
+
+    /**
+     * prints out a list of all the teams for all 3 divisions. helpful for adding matches
+     */
+    public void getDivisionTeams() {
+        System.out.println("Division 1 Teams");
+        teamList.stream().filter(team -> team.getDivision().equals("Division 1")).forEach(team -> System.out.println(team.getName()));
+        System.out.println("Division 2 Teams");
+        teamList.stream().filter(team -> team.getDivision().equals("Division 2")).forEach(team -> System.out.println(team.getName()));
+        System.out.println("Division 3 Teams");
+        teamList.stream().filter(team -> team.getDivision().equals("Division 3")).forEach(team -> System.out.println(team.getName()));
+    }
+
+    /**
+     * Add a match and all relevant scores to the teams participating
+     * Checks if both teams are in the same division, if they aren't, does nothing
+     *
+     * 
+     */
+    public void addMatch(String team1, String team2, 
+    String score1, String score2)
+    {
+        ArrayList<Integer> scoreOne = new ArrayList<>();
+        ArrayList<Integer> scoreTwo = new ArrayList<>();
+        Team teamOne = teamList.stream().filter(team -> team.getName().equals(team1)).findFirst().get();
+        Team teamTwo = teamList.stream().filter(team -> team.getName().equals(team2)).findFirst().get();
+
+        Arrays.asList(score1.split(",")).forEach(num -> scoreOne.add(Integer.parseInt(num.trim())));
+        Arrays.asList(score2.split(",")).forEach(num -> scoreTwo.add(Integer.parseInt(num.trim())));
+        if (!checkDivision(teamOne, teamTwo)) {
+            System.out.println("Teams not in same division");
+            return;
+        }
+
+        if (!scoreValidator(scoreOne, scoreTwo)) {
+            System.out.println("scores entered incorrectly");
+            return;
+        } 
+
+        int point1 = 0;
+        int point2 = 0;
+
+        for (int x = 0; x < scoreOne.size(); x++)
         {
-            ArrayList<Team> List = getTeamsInDivision(divisionName);
-            
-            Collections.sort(List, Comparator.comparing(Team::getLeaguePoints)
-                       .thenComparing(Team::getpointDiff));
-            Collections.reverse(List);
-            
-            int rank = 1;
-            for(Team team : List) 
+            int pointDiff = scoreOne.get(x) - scoreTwo.get(x);
+            if (pointDiff > 0)
             {
-                System.out.println("Team name: " + team.getName() + ", " + "Points: " + team.getLeaguePoints() + ", " + "Rank: " + rank);
-                rank++;
+                teamOne.updateLeaguePoints();
+                point1++;
+            }
+            else
+            {
+                teamTwo.updateLeaguePoints();
+                point2++;
+            }
+
+            teamOne.updatePointDiff(pointDiff);
+            teamTwo.updatePointDiff(-pointDiff);
+
+            if ((point1 == 3) || (point2 == 3))
+            {
+                break;
             }
         }
+
+        if (point1 == 3)
+        {
+            teamOne.updateLeaguePoints();
+        }
+        else 
+        {
+            teamTwo.updateLeaguePoints();
+        }
+
+    }
+
+    /**
+     * iterates over a division and prints out the standings. should print 
+     * them in order from 1st to last place.
+     * 
+     * has to adjust standing by both league points and point diff which is 
+     * stored on each team. could do something here where if a team has 0 
+     * points and 0 ptdiff (because they didn't compete or something) make 
+     * it print them last with DNQ (did not qualify)
+     * 
+     * divisionName will always be "Division 1, Division 2, or Division 3"
+     *
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
+     */
+    public void calculateStanding(String divisionName)
+    {
+        ArrayList<Team> List = getTeamsInDivision(divisionName);
+
+        Collections.sort(List, Comparator.comparing(Team::getLeaguePoints)
+            .thenComparing(Team::getpointDiff));
+        Collections.reverse(List);
+
+        int rank = 1;
+        for(Team team : List) 
+        {
+            System.out.println("Team name: " + team.getName() + ", " + "Points: " + team.getLeaguePoints() + ", " + "Rank: " + rank);
+            rank++;
+        }
+    }
 
 }
