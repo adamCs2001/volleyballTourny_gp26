@@ -38,24 +38,6 @@ public class League
     }
 
     /**
-     * Simple method to check if both teams are in the same division should return true or false
-     *
-     * @param  y  a sample parameter for a method
-     * @return    boolean
-     */
-    private boolean checkDivision(Team team1, Team team2)
-    {
-        if (team1.getDivision().equals(team2.getDivision()))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
-    }
-
-    /**
      * Iterate over the team list and put teams from the given division into a list then return it.
      *
      * @param  divisionName  name of the division
@@ -79,33 +61,33 @@ public class League
 
         if (scores1.size() != scores2.size()) {
             err = false;
-            System.out.println("differnt numbers of set scores");
+            System.out.println("Different numbers of set scores");
         }
 
         if (scores1.size() < 2 || scores2.size() < 2) {
             err = false;
-            System.out.println("not enough games played");
+            System.out.println("Not enough games played");
         }
 
         if (scores1.stream().filter(x -> (x > 21)).filter(x -> (x < 0)).count() > 0) {
             err = false;
-            System.out.println("score 1 out of range");
+            System.out.println("Score 1 out of range");
         }
 
         if (scores2.stream().filter(x -> (x > 21)).filter(x -> (x < 0)).count() > 0) {
             err = false;
-            System.out.println("score 2 out of range");
+            System.out.println("Score 2 out of range");
         }
 
         if (scores1.size() < 5) {
             if (scores2.stream().filter(x -> (x == 21)).count() != 3 && scores1.stream().filter(x -> (x == 21)).count() != 3) {
                 err = false;
-                System.out.println("no winner declared");
+                System.out.println("No winner declared");
             }
         } else {
             if (scores1.get(4) != 15 && scores2.get(4) != 15) {
                 err = false;
-                System.out.println("no winner declared");
+                System.out.println("No winner declared");
             }
         }
 
@@ -114,13 +96,15 @@ public class League
     }
 
     /**
-     * prints out a list of all the teams for all 3 divisions. helpful for adding matches
+     * Prints out a list of all the teams for all 3 divisions, helpful for adding matches.
      */
     public void getDivisionTeams() {
         System.out.println("Division 1 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 1")).forEach(team -> System.out.println(team.getName()));
+        
         System.out.println("Division 2 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 2")).forEach(team -> System.out.println(team.getName()));
+        
         System.out.println("Division 3 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 3")).forEach(team -> System.out.println(team.getName()));
     }
@@ -141,13 +125,13 @@ public class League
 
         Arrays.asList(score1.split(",")).forEach(num -> scoreOne.add(Integer.parseInt(num.trim())));
         Arrays.asList(score2.split(",")).forEach(num -> scoreTwo.add(Integer.parseInt(num.trim())));
-        if (!checkDivision(teamOne, teamTwo)) {
-            System.out.println("Teams not in same division");
+        if (!(teamOne.getDivision().equals(teamTwo.getDivision()))) {
+            System.out.println("Teams not in same division.");
             return;
         }
 
         if (!scoreValidator(scoreOne, scoreTwo)) {
-            System.out.println("scores entered incorrectly");
+            System.out.println("Scores entered incorrectly.");
             return;
         } 
 
