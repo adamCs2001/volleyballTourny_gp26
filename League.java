@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * The League class manages the whole league. from here you can add matches 
  * and check the standings in the league it keeps a list of all the teams 
- * currently in the league
+ * currently in the league. It creates a league to be modified later
  *
  */
 public class League
@@ -22,13 +22,16 @@ public class League
         final int players = 12;
         final int coaches = 2;
 
+        leagueSetup();
+
     }
 
     /**
-     * Simple method to create teams and adds them to divisions.
+     * Simple method to create teams and adds them to divisions. 
+     * Used in constructor to generate a league
      * 
      */
-    public void leagueSetup()
+    private void leagueSetup()
     {
         for (int x = 0; x < 15; x++) {
             int division = ((x + 1) % 3) + 1;
@@ -56,6 +59,20 @@ public class League
         return divisionTeam;
     }
 
+    /**
+     * Score validator. used to validate score lists input by user to ensure that the they are valid uses the following checks:
+     * 
+     * size - both score list have to be the same length
+     * 
+     * min size - There has to be at least 3 sets played
+     * 
+     * max score - if any of the scores are over 21, the scores are rejected
+     * 
+     * min score - if any score is less than 0, the scores are rejected
+     * 
+     * declared winners - if there are less than 5 sets played, and less than 3 matches are won by either team, no winner is declared
+     *                  - if there are 5 sets played, and the last score for either team isn't 15 no winner is declared
+     */
     private boolean scoreValidator(ArrayList<Integer> scores1, ArrayList<Integer> scores2) {
         boolean err = true;
 
@@ -91,7 +108,6 @@ public class League
             }
         }
 
-
         return err;
     }
 
@@ -101,10 +117,10 @@ public class League
     public void getDivisionTeams() {
         System.out.println("Division 1 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 1")).forEach(team -> System.out.println(team.getName()));
-        
+
         System.out.println("Division 2 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 2")).forEach(team -> System.out.println(team.getName()));
-        
+
         System.out.println("Division 3 Teams");
         teamList.stream().filter(team -> team.getDivision().equals("Division 3")).forEach(team -> System.out.println(team.getName()));
     }
@@ -197,7 +213,7 @@ public class League
         int rank = 1;
         for(Team team : List) 
         {
-            System.out.println("Team name: " + team.getName() + ", " + "Points: " + team.getLeaguePoints() + ", " + "Rank: " + rank);
+            System.out.println("Rank: " + rank + "," + "Team name: " + team.getName() + ", " + "Points: " + team.getLeaguePoints() + ", " + "Point sum: " + team.getpointDiff() );
             rank++;
         }
     }
