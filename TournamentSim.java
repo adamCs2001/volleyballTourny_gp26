@@ -1,13 +1,10 @@
 import java.util.*;
 /**
- * Write a description of class TournamentSim here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Simulates a tournament.
+ * Creates matchups between all teams in the same division and randomly generates scores for each matchup.
  */
 public class TournamentSim
 {
-    // instance variables - replace the example below with your own
 
     /**
      * Constructor for objects of class TournamentSim

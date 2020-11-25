@@ -9,7 +9,7 @@ import java.lang.Math;
  */
 public class Team
 {
-    // instance variables - replace the example below with your own
+    // instance variables 
     private String name;
     private String division;
     private ArrayList<Person> personList;
@@ -19,11 +19,11 @@ public class Team
     /**
      * Constructor for objects of class Team
      * 
-     * take in all the informationto create a team. keeps a list of all the players 
+     * take in all the information to create a team. keeps a list of all the players 
      * and coaches associated with the team, currently only stores their names in a 
      * list
      * 
-     * Team keeps track of it's current league points as well as the running tally of 
+     * Team keeps track of its current league points as well as the running tally of 
      * the point diff for each of the games that it's taken part of for standing purposes. 
      * 
      * 
@@ -57,7 +57,7 @@ public class Team
     }
     
     /**
-     * returns the division associated with this team
+     * returns the name of the team
      */
     public String getName()
     {

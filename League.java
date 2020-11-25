@@ -128,7 +128,10 @@ public class League
      * Add a match and all relevant scores to the teams participating
      * Checks if both teams are in the same division, if they aren't, does nothing
      *
-     * 
+     * @param team1 - the first team
+     * @param team2 - the second team
+     * @param score1 - the points scored by team1, in a comma separated list - eg "21, 18, 21, 16, 15"
+     * @param score2 - the points scored by team2, in a comma separated list - eg "21, 18, 21, 16, 15"
      */
     public void addMatch(String team1, String team2, 
     String score1, String score2)
@@ -188,18 +191,15 @@ public class League
     }
 
     /**
-     * Iterates over a division and prints out the standings. should print 
+     * Iterates over a division and prints out the standings. Prints 
      * them in order from 1st to last place.
      * 
      * Has to adjust standing by both league points and point diff which is 
-     * stored on each team. could do something here where if a team has 0 
-     * points and 0 ptdiff (because they didn't compete or something) make 
-     * it print them last with DNQ (did not qualify)
+     * stored on each team.
      * 
-     * divisionName will always be "Division 1, Division 2, or Division 3"
+     * divisionName will always be "Division 1", "Division 2", or "Division 3"
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param  divisionName the division to print the standings from.
      */
     public void calculateStanding(String divisionName)
     {
