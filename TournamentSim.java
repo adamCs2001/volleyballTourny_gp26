@@ -20,7 +20,7 @@ public class TournamentSim
     * Generate two lists of scores for two teams.
     *
     */
-    public ArrayList<String> createScore()
+    private ArrayList<String> createScore()
     {
           int point1 = 0;
           int point2 = 0;
@@ -81,7 +81,7 @@ public class TournamentSim
                  {
                      ArrayList<String> scoreList = createScore();
                      System.out.println(divisionTeam.get(0).getName() + " : " + divisionTeam.get(i).getName());
-                     System.out.println(scoreList); // I put this and the line above to check the content of scoreList, remove if you want.
+                     System.out.println(scoreList);
                      league.addMatch(divisionTeam.get(0).getName(),divisionTeam.get(i).getName(),scoreList.get(0),scoreList.get(1));
                  }
                  divisionTeam.remove(0);

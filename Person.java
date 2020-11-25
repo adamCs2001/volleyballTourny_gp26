@@ -8,7 +8,7 @@
 public class Person
 {
     // instance variables - replace the example below with your own
-    String name;
+    private String name;
 
     /**
      * Generates a person

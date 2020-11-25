@@ -12,8 +12,7 @@ public class Team
     // instance variables - replace the example below with your own
     private String name;
     private String division;
-    private ArrayList<Player> playerList;
-    private ArrayList<Coach> coachList;
+    private ArrayList<Person> personList;
     private int leaguePoints;
     private int pointDiff;
 
@@ -37,23 +36,22 @@ public class Team
     {
         this.name = name;
         this.division = "Division " + division;
-        this.playerList = new ArrayList<>();
-        this.coachList = new ArrayList<>();
+        personList = new ArrayList<>();
         this.leaguePoints = 0;
         this.pointDiff = 0;
 
         for (int x = 0; x < players; x++) {
-            int jerseyNum = (int)Math.random() * 100 + 1;
-            Player player = new Player("player " + jerseyNum);
+            int jerseyNum = (int)(Math.random() * 100) + 1;
+            Person player = new Player("player " + jerseyNum);
 
-            playerList.add(player);
+            personList.add(player);
         }
 
         for (int x = 0; x < coaches; x++) {
-            int jerseyNum = (int)Math.random() * 100 + 1;
-            Coach coach = new Coach("Coach " + jerseyNum);
+            int jerseyNum = (int)(Math.random() * 100) + 1;
+            Person coach = new Coach("Coach " + jerseyNum);
 
-            coachList.add(coach);
+            personList.add(coach);
         }
 
     }

@@ -1,4 +1,3 @@
-
 import java.util.*;
 /**
  * The League class manages the whole league. from here you can add matches 
@@ -189,10 +188,10 @@ public class League
     }
 
     /**
-     * iterates over a division and prints out the standings. should print 
+     * Iterates over a division and prints out the standings. should print 
      * them in order from 1st to last place.
      * 
-     * has to adjust standing by both league points and point diff which is 
+     * Has to adjust standing by both league points and point diff which is 
      * stored on each team. could do something here where if a team has 0 
      * points and 0 ptdiff (because they didn't compete or something) make 
      * it print them last with DNQ (did not qualify)
